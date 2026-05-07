@@ -1,0 +1,15 @@
+services:
+  # The Database
+  db:
+    container_name: mycontainer
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: opspulse_db
+
+  # The Python ETL Application
+  etl_app:
+    build: .
+    depends_on:
+      - db
