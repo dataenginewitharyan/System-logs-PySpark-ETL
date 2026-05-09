@@ -1,15 +1,32 @@
 services:
-  # The Database
   db:
-    container_name: mycontainer
-    image: postgres:15-alpine
+    image: postgres:15
+    container_name: postgres_db
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: opspulse_db
+    ports:
+      - "5432:5432"
 
-  # The Python ETL Application
-  etl_app:
+  generator:
     build: .
+    container_name: log_producer
+    volumes:
+      - .:/app
+    command: python real_metrics_collector.py
     depends_on:
       - db
+
+  app:
+    build: .
+    container_name: spark_etl
+    environment:
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - db
+      - generator
+    volumes:
+      - .:/app
+    # Spark waits 30s to ensure the generator finishes its 15 logs
+    command: sh -c "sleep 30 && python main.py"

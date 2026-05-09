@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Spark
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Data (Ignore logs so GitHub stays clean)
+data/server_logs.csv
+
+# System
+.DS_Store
