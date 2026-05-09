@@ -24,17 +24,6 @@ The pipeline intentionally injects "chaos data" (e.g., CPU spikes at 999.9%) to 
 | 🎲 **Chaos Injection** | 10% random chance of generating "invalid" CPU spikes to test ETL logic |
 | 🖥️ **Cross-Platform** | Works on Apple Silicon (M1/M2/M4), Intel, and Windows via Docker |
 
-## 📂 Project Structure & File Purposes
-
-```text
-├── docker-compose.yml          # Orchestrates 3 services (PostgreSQL, Generator, Spark ETL)
-├── Dockerfile                  # Builds Python + Java 21 + PySpark environment
-├── main.py                     # PySpark ETL logic (Extract, Transform, Load)
-├── real_metrics_collector.py   # Generates metrics from real system stats
-├── requirements.txt            # Python dependencies (pyspark, psutil)
-├── README.md                   # Project Documentation
-└── data/                       # Auto-created folder for CSV storage
-    └── server_logs.csv         # Raw metrics (generated at runtime)
 
 
 ### 🔍 File-by-File Explanation
@@ -73,34 +62,6 @@ Lists Python dependencies:
 - `pyspark` - Apache Spark Python API
 - `psutil` - System metrics collection library
 
----
-
-### 2. For the Project Architecture
-```markdown
-## 🧠 Project Architecture
-
-```text
- ┌─────────────────────────────────────────────────────────────┐
- │                      DOCKER COMPOSE                         │
- │                                                             │
- │  ┌──────────────┐     ┌──────────────┐                      │
- │  │   GENERATOR  │────▶│   CSV File   │                      │
- │  │  (Python)    │     │   (Volume)   │                      │
- │  └──────────────┘     └──────┬───────┘                      │
- │                              │                              │
- │                              ▼                              │
- │                       ┌──────────────┐                      │
- │                       │  SPARK ETL   │                      │
- │                       │  (PySpark)   │                      │
- │                       └──────┬───────┘                      │
- │                              │                              │
- │                              ▼                              │
- │                       ┌──────────────┐                      │
- │                       │ POSTGRESQL   │                      │
- │                       │   Database   │                      │
- │                       └──────────────┘                      │
- │                                                             │
- └─────────────────────────────────────────────────────────────┘
 
 ## 🚀 How to Run
 
