@@ -24,16 +24,17 @@ The pipeline intentionally injects "chaos data" (e.g., CPU spikes at 999.9%) to 
 | 🎲 **Chaos Injection** | 10% random chance of generating "invalid" CPU spikes to test ETL logic |
 | 🖥️ **Cross-Platform** | Works on Apple Silicon (M1/M2/M4), Intel, and Windows via Docker |
 
-## 📁 Project Structure & File Purposes
+## 📂 Project Structure & File Purposes
 
-├── docker-compose.yml # Orchestrates 3 services (PostgreSQL, Log Generator, Spark ETL)
-├── Dockerfile # Builds Python + Java 21 + PySpark environment
-├── main.py # PySpark ETL logic (Extract, Transform, Load)
-├── real_metrics_collector.py # Generates fake server metrics from real system stats
-├── requirements.txt # Python dependencies (pyspark, psutil)
-├── README.md # This file
-└── data/ # Auto-created folder for CSV storage
-└── server_logs.csv # Raw metrics (generated at runtime)
+```text
+├── docker-compose.yml          # Orchestrates 3 services (PostgreSQL, Generator, Spark ETL)
+├── Dockerfile                  # Builds Python + Java 21 + PySpark environment
+├── main.py                     # PySpark ETL logic (Extract, Transform, Load)
+├── real_metrics_collector.py   # Generates metrics from real system stats
+├── requirements.txt            # Python dependencies (pyspark, psutil)
+├── README.md                   # Project Documentation
+└── data/                       # Auto-created folder for CSV storage
+    └── server_logs.csv         # Raw metrics (generated at runtime)
 
 
 ### 🔍 File-by-File Explanation
@@ -72,8 +73,14 @@ Lists Python dependencies:
 - `pyspark` - Apache Spark Python API
 - `psutil` - System metrics collection library
 
-### Project Architecture
-┌─────────────────────────────────────────────────────────────┐
+---
+
+### 2. For the Project Architecture
+```markdown
+## 🧠 Project Architecture
+
+```text
+ ┌─────────────────────────────────────────────────────────────┐
  │                      DOCKER COMPOSE                         │
  │                                                             │
  │  ┌──────────────┐     ┌──────────────┐                      │
@@ -154,9 +161,9 @@ PostgreSQL 15 - Data warehousing
 Docker & Docker Compose - Container orchestration
 psutil - System metrics collection
 Java 21 - PySpark runtime dependency
-🎓 Learning Outcomes
 
-By studying this project, you'll understand:
+🎓 Learning Outcomes
+By studying this project, you will understand:
 
 ✅ How to containerize data pipelines with Docker
 ✅ PySpark DataFrame operations (read, transform, write)
@@ -165,16 +172,7 @@ By studying this project, you'll understand:
 ✅ Data quality patterns (deduplication, filtering, standardization)
 ✅ Chaos engineering principles for testing ETL logic
 ✅ Cross-platform Docker configurations (ARM64 vs AMD64)
-🤝 Contributing
 
-This is a portfolio project, but feel free to fork and enhance:
-
-Add more data quality checks (null validation, date formatting)
-Implement incremental loads instead of mode("overwrite")
-Add a visualization layer with Streamlit or Grafana
-Create unit tests for the ETL logic
-Add alerting when CPU exceeds thresholds
-Implement batch processing for larger datasets
 
 
 
